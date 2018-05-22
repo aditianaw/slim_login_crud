@@ -1,0 +1,47 @@
+<html>
+<head>
+    <title>Example Application</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+</head>
+<body>
+<h1>All Component</h1>
+
+<p><a href="/component/new">Add new Component</a></p>
+
+<?php
+if(count($components) > 0):
+?>
+<table class="pure-table">
+    <tr>
+        <th>ID</th>
+        <th>Component</th>
+		<th>Aksi </th>
+      
+    </tr>
+
+<?php
+    $odd = true;
+    foreach($components as $component): ?>
+
+        <tr <?=$odd ? "class=\"pure-table-odd\"" : ""; ?>>
+        <td><?=$component->getID() ?></td>
+        <td><?=$component->getName() ?></td>
+		<td>	
+				<a href="<?=$router->pathFor('component-detail', ['id' => $component->getId()])?>">view</a>
+				<a href="<?=$router->pathFor('component-update', ['id' => $component->getId()])?>">Update</a>
+				<a href="/component/<?=$component->getId()?>/delete">Delete</a>
+		</td>
+        
+    </tr>
+
+<?php 
+    $odd = $odd ? false : true;
+    endforeach; ?>
+</table>
+<?php else: ?>
+<p>No current Component</p>
+<?php endif; ?>
+<?php require 'footer.php' ?>
+</body>
+</html>
+
